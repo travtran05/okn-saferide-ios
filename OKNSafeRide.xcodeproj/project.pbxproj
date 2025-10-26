@@ -17,6 +17,7 @@
 		F26E773D2EAE7A2D00644780 /* PositioningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77342EAE78BB00644780 /* PositioningView.swift */; };
 		F26E773E2EAE7A3200644780 /* IdleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77332EAE78AB00644780 /* IdleView.swift */; };
 		F26E773F2EAE7A3700644780 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E772F2EAE785700644780 /* TestViewModel.swift */; };
+		F26E77422EAE8A8F00644780 /* FaceTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77412EAE89E900644780 /* FaceTracker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		F26E77342EAE78BB00644780 /* PositioningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningView.swift; sourceTree = "<group>"; };
 		F26E77352EAE78CF00644780 /* OKNTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKNTestView.swift; sourceTree = "<group>"; };
 		F26E77362EAE78E100644780 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		F26E77412EAE89E900644780 /* FaceTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTracker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -56,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				F26E771A2EAE73E500644780 /* OKNSafeRide */,
+				F26E77402EAE89DB00644780 /* Managers */,
 				F26E772B2EAE77BC00644780 /* Utilities */,
 				F26E772A2EAE77AB00644780 /* Components */,
 				F26E77292EAE77A700644780 /* Views */,
@@ -116,6 +119,14 @@
 				F26E772E2EAE783A00644780 /*  OKNCalculator.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F26E77402EAE89DB00644780 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F26E77412EAE89E900644780 /* FaceTracker.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +211,7 @@
 				F26E773F2EAE7A3700644780 /* TestViewModel.swift in Sources */,
 				F26E773D2EAE7A2D00644780 /* PositioningView.swift in Sources */,
 				F26E773E2EAE7A3200644780 /* IdleView.swift in Sources */,
+				F26E77422EAE8A8F00644780 /* FaceTracker.swift in Sources */,
 				F26E77392EAE7A1800644780 /* CameraView.swift in Sources */,
 				F26E77382EAE7A1200644780 /* GreenOverlay.swift in Sources */,
 			);

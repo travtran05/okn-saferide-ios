@@ -10,7 +10,6 @@ struct ContentView: View {
             switch viewModel.currentPhase {
             case .idle:
                 IdleView(onStartTest: {
-                    cameraManager.checkAuthorization()
                     viewModel.startTest()
                 })
                 
@@ -42,27 +41,45 @@ struct ContentView: View {
             }
         }
         .ignoresSafeArea()
-        .onReceive(viewModel.$currentOrientation) { orientation in
-            // Update app orientation based on test phase
-            AppDelegate.orientationLock = orientation
-            
-            // Force orientation change using modern iOS 16+ API
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                let geometryPreferences: UIWindowScene.GeometryPreferences
-                
-                if orientation == .landscape {
-                    geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .landscapeRight)
-                } else {
-                    geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .portrait)
+        .onChange(of: viewModel.currentOrientation) { _, newOrientation in
+                    updateOrientation(newOrientation)
+        }
+        .onChange(of: viewModel.currentPhase) { _, newPhase in
+            // Force camera orientation update when phase changes
+            if newPhase == .oknTest {
+                DispatchQueue.main.async {
+                    // Ensure camera updates its orientation
+                    NotificationCenter.default.post(name: UIDevice.orientationDidChangeNotification, object: nil)
                 }
-                
-                windowScene.requestGeometryUpdate(geometryPreferences) { error in
-                    print("Orientation update error: \(error)")
-                }
-                
-                windowScene.windows.first?.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations()
             }
         }
+        .onAppear {
+            // Start camera immediately on app launch
+            cameraManager.checkAuthorization()
+            
+            // Connect camera to face tracker
+            cameraManager.onFrameCapture = { [weak viewModel] sampleBuffer in
+                viewModel?.faceTracker.processSampleBuffer(sampleBuffer)
+            }
+        }
+    }
+    
+    private func updateOrientation(_ orientation: UIInterfaceOrientationMask) {
+        AppDelegate.orientationLock = orientation
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return
+        }
+        
+        let geometryPreferences: UIWindowScene.GeometryPreferences
+        
+        if orientation == .landscape {
+            geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .landscape)
+        } else {
+            geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .portrait)
+        }
+        
+        windowScene.requestGeometryUpdate(geometryPreferences)
     }
 }
 

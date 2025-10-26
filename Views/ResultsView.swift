@@ -21,11 +21,11 @@ struct ResultsView: View {
             
             ScrollView {
                 VStack(spacing: 30) {
-                    // Title
+                    // Title - Add extra padding for Dynamic Island
                     Text("Test Results")
                         .font(.system(size: 32, weight: .bold))
                         .foregroundColor(.white)
-                        .padding(.top, 40)
+                        .padding(.top, 60) // Increased from 40 to 60
                     
                     // OKN Gain Circle
                     ZStack {

@@ -14,35 +14,37 @@ class TestViewModel: ObservableObject {
     
     private var testTimer: Timer?
     private var eyeTrackingTimer: Timer?
-    private var stripeAnimationValue: Double = 0.0
     
     let testDuration: Int = 10
+    let faceTracker = FaceTracker()
+    private var cancellables = Set<AnyCancellable>()
     
-    // Start test sequence
-    func startTest() {
-        // Stay in portrait for positioning
-        currentOrientation = .portrait
-        currentPhase = .positioning
+    init() {
+        // Observe face tracker updates
+        faceTracker.$faceDetected
+            .assign(to: \.faceDetected, on: self)
+            .store(in: &cancellables)
         
-        // Simulate face detection after 2 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.faceDetected = true
-            self.faceCentered = true
-        }
+        faceTracker.$faceCentered
+            .assign(to: \.faceCentered, on: self)
+            .store(in: &cancellables)
     }
     
-    // Start OKN test - SWITCH TO LANDSCAPE
-    func startOKNTest() {
-        // Force landscape orientation
+    // Start test sequence - IMMEDIATELY GO TO LANDSCAPE
+    func startTest() {
         currentOrientation = .landscape
+        currentPhase = .positioning
+    }
+    
+    // Start OKN test - STAY IN LANDSCAPE
+    func startOKNTest() {
+        // Change phase immediately - no delays
+        currentPhase = .oknTest
+        timeRemaining = testDuration
+        eyeTrackingData = EyeTrackingData()
         
-        // Immediately update phase
-        self.currentPhase = .oknTest
-        self.timeRemaining = self.testDuration
-        self.eyeTrackingData = EyeTrackingData()
-        
-        // Start countdown timer
-        self.testTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+        // Start timers immediately
+        testTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.timeRemaining -= 1
             
@@ -51,22 +53,19 @@ class TestViewModel: ObservableObject {
             }
         }
         
-        // Start eye tracking simulation (50ms intervals)
-        self.eyeTrackingTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
+        eyeTrackingTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
             guard let self = self else { return }
-            self.simulateEyeMovement()
+            self.collectEyeData()
         }
     }
     
-    // Simulate eye movement following stripes
-    private func simulateEyeMovement() {
-        stripeAnimationValue += 0.01
-        let eyeX = sin(stripeAnimationValue * 2 * .pi) * 0.3
-        let eyeY = sin(stripeAnimationValue * .pi) * 0.1
+    // Collect real eye tracking data
+    private func collectEyeData() {
+        let currentTime = Double(testDuration - timeRemaining) + (Double(timeRemaining) / 10.0)
         
-        eyeTrackingData.eyeX.append(eyeX)
-        eyeTrackingData.eyeY.append(eyeY)
-        eyeTrackingData.time.append(Double(testDuration - timeRemaining) + Double(timeRemaining) / 10.0)
+        eyeTrackingData.eyeX.append(faceTracker.eyeX)
+        eyeTrackingData.eyeY.append(faceTracker.eyeY)
+        eyeTrackingData.time.append(currentTime)
     }
     
     // Complete test and calculate results - RETURN TO PORTRAIT
@@ -74,7 +73,6 @@ class TestViewModel: ObservableObject {
         testTimer?.invalidate()
         eyeTrackingTimer?.invalidate()
         
-        // Calculate OKN gain
         let gain = OKNCalculator.calculateOKNGain(
             eyeXData: eyeTrackingData.eyeX,
             eyeYData: eyeTrackingData.eyeY,
@@ -85,9 +83,8 @@ class TestViewModel: ObservableObject {
         testResults.interpretation = OKNCalculator.getInterpretation(oknGain: gain)
         testResults.color = OKNCalculator.getColor(oknGain: gain)
         
-        // Return to portrait orientation
         currentOrientation = .portrait
-        self.currentPhase = .results
+        currentPhase = .results
     }
     
     // Reset test
