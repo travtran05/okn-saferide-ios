@@ -6,8 +6,31 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F26E772D2EAE781F00644780 /* TestState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E772C2EAE781900644780 /* TestState.swift */; };
+		F26E77372EAE7A0D00644780 /*  OKNCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E772E2EAE783A00644780 /*  OKNCalculator.swift */; };
+		F26E77382EAE7A1200644780 /* GreenOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77322EAE789400644780 /* GreenOverlay.swift */; };
+		F26E77392EAE7A1800644780 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77312EAE787F00644780 /* CameraView.swift */; };
+		F26E773A2EAE7A1E00644780 /* StripesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77302EAE786B00644780 /* StripesView.swift */; };
+		F26E773B2EAE7A2200644780 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77362EAE78E100644780 /* ResultsView.swift */; };
+		F26E773C2EAE7A2700644780 /* OKNTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77352EAE78CF00644780 /* OKNTestView.swift */; };
+		F26E773D2EAE7A2D00644780 /* PositioningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77342EAE78BB00644780 /* PositioningView.swift */; };
+		F26E773E2EAE7A3200644780 /* IdleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E77332EAE78AB00644780 /* IdleView.swift */; };
+		F26E773F2EAE7A3700644780 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26E772F2EAE785700644780 /* TestViewModel.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		F26E77182EAE73E500644780 /* OKNSafeRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OKNSafeRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F26E772C2EAE781900644780 /* TestState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestState.swift; sourceTree = "<group>"; };
+		F26E772E2EAE783A00644780 /*  OKNCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " OKNCalculator.swift"; sourceTree = "<group>"; };
+		F26E772F2EAE785700644780 /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
+		F26E77302EAE786B00644780 /* StripesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripesView.swift; sourceTree = "<group>"; };
+		F26E77312EAE787F00644780 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		F26E77322EAE789400644780 /* GreenOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenOverlay.swift; sourceTree = "<group>"; };
+		F26E77332EAE78AB00644780 /* IdleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleView.swift; sourceTree = "<group>"; };
+		F26E77342EAE78BB00644780 /* PositioningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningView.swift; sourceTree = "<group>"; };
+		F26E77352EAE78CF00644780 /* OKNTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKNTestView.swift; sourceTree = "<group>"; };
+		F26E77362EAE78E100644780 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,6 +56,11 @@
 			isa = PBXGroup;
 			children = (
 				F26E771A2EAE73E500644780 /* OKNSafeRide */,
+				F26E772B2EAE77BC00644780 /* Utilities */,
+				F26E772A2EAE77AB00644780 /* Components */,
+				F26E77292EAE77A700644780 /* Views */,
+				F26E77282EAE779E00644780 /* ViewModels */,
+				F26E77262EAE773B00644780 /* Models */,
 				F26E77192EAE73E500644780 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +71,51 @@
 				F26E77182EAE73E500644780 /* OKNSafeRide.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F26E77262EAE773B00644780 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F26E772C2EAE781900644780 /* TestState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F26E77282EAE779E00644780 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F26E772F2EAE785700644780 /* TestViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F26E77292EAE77A700644780 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F26E77362EAE78E100644780 /* ResultsView.swift */,
+				F26E77352EAE78CF00644780 /* OKNTestView.swift */,
+				F26E77342EAE78BB00644780 /* PositioningView.swift */,
+				F26E77332EAE78AB00644780 /* IdleView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F26E772A2EAE77AB00644780 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F26E77322EAE789400644780 /* GreenOverlay.swift */,
+				F26E77312EAE787F00644780 /* CameraView.swift */,
+				F26E77302EAE786B00644780 /* StripesView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F26E772B2EAE77BC00644780 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F26E772E2EAE783A00644780 /*  OKNCalculator.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +192,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F26E773B2EAE7A2200644780 /* ResultsView.swift in Sources */,
+				F26E773C2EAE7A2700644780 /* OKNTestView.swift in Sources */,
+				F26E77372EAE7A0D00644780 /*  OKNCalculator.swift in Sources */,
+				F26E773A2EAE7A1E00644780 /* StripesView.swift in Sources */,
+				F26E772D2EAE781F00644780 /* TestState.swift in Sources */,
+				F26E773F2EAE7A3700644780 /* TestViewModel.swift in Sources */,
+				F26E773D2EAE7A2D00644780 /* PositioningView.swift in Sources */,
+				F26E773E2EAE7A3200644780 /* IdleView.swift in Sources */,
+				F26E77392EAE7A1800644780 /* CameraView.swift in Sources */,
+				F26E77382EAE7A1200644780 /* GreenOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +339,7 @@
 				DEVELOPMENT_TEAM = 6JVL9XXT7F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required for eye tracking and impairment detection";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -288,6 +372,7 @@
 				DEVELOPMENT_TEAM = 6JVL9XXT7F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required for eye tracking and impairment detection";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
