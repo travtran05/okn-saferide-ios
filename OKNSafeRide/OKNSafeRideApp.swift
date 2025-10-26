@@ -6,6 +6,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     static var orientationLock = UIInterfaceOrientationMask.portrait
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        print("AppDelegate: Returning orientation lock: \(AppDelegate.orientationLock)")
         return AppDelegate.orientationLock
     }
 }

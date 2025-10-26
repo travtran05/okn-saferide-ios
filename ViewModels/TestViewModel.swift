@@ -30,15 +30,17 @@ class TestViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    // Start test sequence - IMMEDIATELY GO TO LANDSCAPE
+    // Start test sequence
     func startTest() {
         currentOrientation = .landscape
+        lockOrientation(.landscape)
         currentPhase = .positioning
+        timeRemaining = 5
     }
     
-    // Start OKN test - STAY IN LANDSCAPE
+    // Start OKN test
     func startOKNTest() {
-        // Change phase immediately - no delays
+        lockOrientation(.landscape)
         currentPhase = .oknTest
         timeRemaining = testDuration
         eyeTrackingData = EyeTrackingData()
@@ -68,7 +70,7 @@ class TestViewModel: ObservableObject {
         eyeTrackingData.time.append(currentTime)
     }
     
-    // Complete test and calculate results - RETURN TO PORTRAIT
+    // Complete test and calculate results
     func completeTest() {
         testTimer?.invalidate()
         eyeTrackingTimer?.invalidate()
@@ -84,17 +86,25 @@ class TestViewModel: ObservableObject {
         testResults.color = OKNCalculator.getColor(oknGain: gain)
         
         currentOrientation = .portrait
+        lockOrientation(.portrait)
         currentPhase = .results
     }
     
     // Reset test
     func resetTest() {
         currentOrientation = .portrait
+        lockOrientation(.portrait)
         currentPhase = .idle
         faceDetected = false
         faceCentered = false
         timeRemaining = testDuration
         eyeTrackingData = EyeTrackingData()
         testResults = TestResults()
+    }
+    
+    // Helper method to lock orientation
+    private func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+        print("TestViewModel: Locking orientation to \(orientation)")
+        AppDelegate.orientationLock = orientation
     }
 }

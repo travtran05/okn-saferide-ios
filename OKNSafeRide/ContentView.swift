@@ -42,14 +42,15 @@ struct ContentView: View {
         }
         .ignoresSafeArea()
         .onChange(of: viewModel.currentOrientation) { _, newOrientation in
-                    updateOrientation(newOrientation)
+            // Orientation is now handled directly in TestViewModel
+            print("ContentView: Orientation changed to \(newOrientation)")
         }
         .onChange(of: viewModel.currentPhase) { _, newPhase in
             // Force camera orientation update when phase changes
             if newPhase == .oknTest {
                 DispatchQueue.main.async {
-                    // Ensure camera updates its orientation
-                    NotificationCenter.default.post(name: UIDevice.orientationDidChangeNotification, object: nil)
+                    // Force camera orientation update
+                    cameraManager.forceOrientationUpdate()
                 }
             }
         }
@@ -65,21 +66,8 @@ struct ContentView: View {
     }
     
     private func updateOrientation(_ orientation: UIInterfaceOrientationMask) {
-        AppDelegate.orientationLock = orientation
-        
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-            return
-        }
-        
-        let geometryPreferences: UIWindowScene.GeometryPreferences
-        
-        if orientation == .landscape {
-            geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .landscape)
-        } else {
-            geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .portrait)
-        }
-        
-        windowScene.requestGeometryUpdate(geometryPreferences)
+        print("ContentView: Orientation changed to \(orientation)")
+        // Orientation is now handled in TestViewModel
     }
 }
 
